@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>welcome to weather app</title>
+
+    
+
+    <style>
+        body{background-color: aqua;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;text-align: center;}
+        .weather_card{font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: blueviolet;
+            background-color: black;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            width: 300px;
+            text-align: center;}
+
+    </style>
+</head>
+<body>
+    <h1>Weather App</h1>
+
+    <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="city" placeholder="Enter city name">
+    <button type="submit">Get Weather</button>
+    
+    </form>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% for i in weather_data %}
+     <div class = "weather_card">
+        <h2>{{i.city}}</h2>
+        
+
+        <p>🌡️Temparature:{{i.temperature}}</p>
+        <p>🌦️Condition:{{i.description}}</p>
+        <p>🥵Feels like:{{i.feels_like}}</p>
+        <p>💧Humidity:{{i.humidity}}</p>
+        <p>💨Windspeed:{{i.windspeed}}</p>
+    
+    </div>
+     {% endfor %}
+    
+</body>
+</html>
